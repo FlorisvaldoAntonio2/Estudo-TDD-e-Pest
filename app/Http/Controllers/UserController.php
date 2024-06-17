@@ -17,14 +17,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
     *  @OA\POST(
     *      path="/api/v1/user",
     *      summary="Adiciona um novo usuário",
@@ -198,14 +190,6 @@ class UserController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
     {
         //
     }
