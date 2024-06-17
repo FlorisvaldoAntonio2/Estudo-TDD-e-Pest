@@ -13,6 +13,133 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/v1/auth": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Realizar o login de um usuário já cadastrado",
+                "description": "Login de usuário",
+                "operationId": "356f38f8f53fda290ab9fdb4048d61c9",
+                "requestBody": {
+                    "description": "Dados do usuário",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email do usuário",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Senha do usuário",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "Token do usuário para acesso a rotas protegidas",
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "description": "Email do usuário",
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "description": "ID do usuário",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Detalhes do erro",
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "description": "Objeto contendo campos específicos do formulário com mensagens de erro",
+                                            "properties": {
+                                                "email": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Mensagem de erro para o campo email",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "password": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Mensagem de erro para o campo senha",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Mensagem de erro genérica indicando falha no servidor",
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros que ocorreram",
+                                            "properties": {
+                                                "system": {
+                                                    "description": "Erros específicos do sistema",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Descrição detalhada do erro",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/user": {
             "post": {
                 "tags": [
