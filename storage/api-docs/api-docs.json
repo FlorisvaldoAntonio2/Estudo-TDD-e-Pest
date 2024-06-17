@@ -1,0 +1,177 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Estudo",
+        "description": "Essa é uma API de estudo para documentação com Swagger, TDD e PEST PHP",
+        "contact": {
+            "email": "florisvaldoantonio2@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/user": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Adiciona um novo usuário",
+                "description": "Cadastro de usuário",
+                "operationId": "556546cc7cc8516e3156817127e398f7",
+                "requestBody": {
+                    "description": "Dados do novo usuário",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nome do novo usuário",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "Email do novo usuário",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Senha do novo usuário",
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "Confirmação da senha do novo usuário",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "description": "Nome do usuário",
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "description": "Email do usuário",
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "description": "Data da última atualização do usuário",
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "created_at": {
+                                            "description": "Data de criação do usuário",
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "id": {
+                                            "description": "ID do usuário",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Detalhes do erro",
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "description": "Objeto contendo campos específicos do formulário com mensagens de erro",
+                                            "properties": {
+                                                "email": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Mensagem de erro para o campo email",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "password": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Mensagem de erro para o campo senha",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "name": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Mensagem de erro para o campo name",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Mensagem de erro genérica indicando falha no servidor",
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros que ocorreram",
+                                            "properties": {
+                                                "system": {
+                                                    "description": "Erros específicos do sistema",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Descrição detalhada do erro",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
