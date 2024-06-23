@@ -187,11 +187,118 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    *  @OA\GET(
+    *      path="/api/v1/user/{user}",
+    *      summary="Retorna dados de um usuário previamente cadastrado",
+    *      description="Retorna dados de um usuário previamente cadastrado",
+    *      tags={"User"},
+    *       @OA\Parameter(
+    *          name="user",
+    *          in="path",
+    *          required=true,
+    *          description="ID do usuário",
+    *          @OA\Schema(
+    *              type="integer"
+    *          )
+    *      ),
+    *      @OA\Response(
+    *          response=200,
+    *          description="OK",
+    *          @OA\JsonContent(
+    *              type="object",
+    *              @OA\Property(
+    *                  property="name",
+    *                  type="string",
+    *                  description="Nome do usuário"
+    *              ),
+    *              @OA\Property(
+    *                  property="email",
+    *                  type="string",
+    *                  description="Email do usuário"
+    *              ),
+    *              @OA\Property(
+    *                  property="updated_at",
+    *                  type="string",
+    *                  format="date-time",
+    *                  description="Data da última atualização do usuário"
+    *              ),
+    *              @OA\Property(
+    *                  property="created_at",
+    *                  type="string",
+    *                  format="date-time",
+    *                  description="Data de criação do usuário"
+    *              ),
+    *              @OA\Property(
+    *                  property="email_verified_at",
+    *                  type="string",
+    *                  format="date-time",
+    *                  description="Data da verificação do email"
+    *              ),
+    *              @OA\Property(
+    *                  property="id",
+    *                  type="integer",
+    *                  description="ID do usuário"
+    *              )
+    *          )
+    *      ),
+    *      @OA\Response(
+    *          response=404,
+    *          description="Not Found",
+    *          @OA\JsonContent(
+    *              type="object",
+    *              @OA\Property(
+    *                  property="message",
+    *                  type="string",
+    *                  description="Mensagem de erro genérica indicando falha no servidor"
+    *              ),
+    *              @OA\Property(
+    *                  property="errors",
+    *                  type="object",
+    *                  @OA\Property(
+    *                      property="user",
+    *                      type="array",
+    *                      @OA\Items(
+    *                          type="string",
+    *                          description="Descrição detalhada do erro"
+    *                      ),
+    *                      description="Erros específicos do sistema"
+    *                  ),
+    *                  description="Detalhes dos erros que ocorreram"
+    *              )
+    *          )
+    *      ),
+    *      @OA\Response(
+    *          response=500,
+    *          description="Internal Server Error",
+    *          @OA\JsonContent(
+    *              type="object",
+    *              @OA\Property(
+    *                  property="message",
+    *                  type="string",
+    *                  description="Mensagem de erro genérica indicando falha no servidor"
+    *              ),
+    *              @OA\Property(
+    *                  property="errors",
+    *                  type="object",
+    *                  @OA\Property(
+    *                      property="system",
+    *                      type="array",
+    *                      @OA\Items(
+    *                          type="string",
+    *                          description="Descrição detalhada do erro"
+    *                      ),
+    *                      description="Erros específicos do sistema"
+    *                  ),
+    *                  description="Detalhes dos erros que ocorreram"
+    *              )
+    *          )
+    *      ),
+    *
+    *  )
+    */
+    public function show(User $user)
     {
-        //
+        return response()->json($user, 200);
     }
 
     /**

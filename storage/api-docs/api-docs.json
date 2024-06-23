@@ -299,6 +299,128 @@
                     }
                 }
             }
+        },
+        "/api/v1/user/{user}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Retorna dados de um usuário previamente cadastrado",
+                "description": "Retorna dados de um usuário previamente cadastrado",
+                "operationId": "9b8a3b95538cd4369cebb94bbb3fa42d",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "description": "Nome do usuário",
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "description": "Email do usuário",
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "description": "Data da última atualização do usuário",
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "created_at": {
+                                            "description": "Data de criação do usuário",
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "email_verified_at": {
+                                            "description": "Data da verificação do email",
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "id": {
+                                            "description": "ID do usuário",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Mensagem de erro genérica indicando falha no servidor",
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros que ocorreram",
+                                            "properties": {
+                                                "user": {
+                                                    "description": "Erros específicos do sistema",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Descrição detalhada do erro",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Mensagem de erro genérica indicando falha no servidor",
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros que ocorreram",
+                                            "properties": {
+                                                "system": {
+                                                    "description": "Erros específicos do sistema",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Descrição detalhada do erro",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
