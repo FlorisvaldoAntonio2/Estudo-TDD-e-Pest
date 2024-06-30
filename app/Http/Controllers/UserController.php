@@ -310,10 +310,106 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    *  @OA\DELETE(
+    *      path="/api/v1/user/{user}",
+    *      summary="Exclui um usuário previamente cadastrado",
+    *      description="Exclui do sistema o usuário informado",
+    *      tags={"User"},
+    *       @OA\Parameter(
+    *          name="user",
+    *          in="path",
+    *          required=true,
+    *          description="ID do usuário",
+    *          @OA\Schema(
+    *              type="integer"
+    *          )
+    *      ),
+    *      @OA\Response(
+    *          response=200,
+    *          description="OK",
+    *          @OA\JsonContent(
+    *              type="object",
+    *              @OA\Property(
+    *                  property="name",
+    *                  type="string",
+    *                  description="Nome do usuário"
+    *              ),
+    *              @OA\Property(
+    *                  property="message",
+    *                  type="string",
+    *                  description="Mensagem de retorno"
+    *              )
+    *          )
+    *      ),
+    *      @OA\Response(
+    *          response=404,
+    *          description="Not Found",
+    *          @OA\JsonContent(
+    *              type="object",
+    *              @OA\Property(
+    *                  property="message",
+    *                  type="string",
+    *                  description="Mensagem de erro genérica indicando falha no servidor"
+    *              ),
+    *              @OA\Property(
+    *                  property="errors",
+    *                  type="object",
+    *                  @OA\Property(
+    *                      property="user",
+    *                      type="array",
+    *                      @OA\Items(
+    *                          type="string",
+    *                          description="Descrição detalhada do erro"
+    *                      ),
+    *                      description="Erros específicos do sistema"
+    *                  ),
+    *                  description="Detalhes dos erros que ocorreram"
+    *              )
+    *          )
+    *      ),
+    *      @OA\Response(
+    *          response=500,
+    *          description="Internal Server Error",
+    *          @OA\JsonContent(
+    *              type="object",
+    *              @OA\Property(
+    *                  property="message",
+    *                  type="string",
+    *                  description="Mensagem de erro genérica indicando falha no servidor"
+    *              ),
+    *              @OA\Property(
+    *                  property="errors",
+    *                  type="object",
+    *                  @OA\Property(
+    *                      property="system",
+    *                      type="array",
+    *                      @OA\Items(
+    *                          type="string",
+    *                          description="Descrição detalhada do erro"
+    *                      ),
+    *                      description="Erros específicos do sistema"
+    *                  ),
+    *                  description="Detalhes dos erros que ocorreram"
+    *              )
+    *          )
+    *      ),
+    *
+    *  )
+    */
+    public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Ocorreu um erro ao tentar deletar o usuário.',
+                'errors' => [
+                    'system' => ['Erro ao deletar.']
+                ]
+            ], 500);
+        }
+
+        return response()->json(['message' => 'Usuário deletado com sucesso.'], 200);
     }
 }

@@ -420,6 +420,107 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Exclui um usuário previamente cadastrado",
+                "description": "Exclui do sistema o usuário informado",
+                "operationId": "0a750b629c4d1711ec14fb7c4c471f26",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "description": "Nome do usuário",
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "description": "Mensagem de retorno",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Mensagem de erro genérica indicando falha no servidor",
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros que ocorreram",
+                                            "properties": {
+                                                "user": {
+                                                    "description": "Erros específicos do sistema",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Descrição detalhada do erro",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Mensagem de erro genérica indicando falha no servidor",
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "description": "Detalhes dos erros que ocorreram",
+                                            "properties": {
+                                                "system": {
+                                                    "description": "Erros específicos do sistema",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "Descrição detalhada do erro",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
